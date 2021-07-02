@@ -2,7 +2,7 @@
 
 def flattenNestedData(nestedDF):
      ##Fetching Complex Datatype Columns from Schema
-   fieldNames = dict([(field.name, field.dataType) for field in nestedDF.schema.fields if type(field.dataType) == StructType]) ##Add if you want to explode ArrayType --> type(field.dataType) == ArrayType or
+   fieldNames = dict([(field.name, field.dataType) for field in nestedDF.schema.fields if type(field.dataType) == ArrayType or type(field.dataType) == StructType])
 
    while len(fieldNames)!=0:
       fieldName=list(fieldNames.keys())[0]
@@ -14,7 +14,7 @@ def flattenNestedData(nestedDF):
       elif type(fieldNames[fieldName]) == ArrayType: ##If we enable the ArrayType in Line 2 & 15, we end up having multiple duplicate records. Each array column value will create new record, which is worst.
          nestedDF=nestedDF.withColumn(fieldName,explode_outer(fieldName))
 
-      fieldNames = dict([(field.name, field.dataType) for field in nestedDF.schema.fields if type(field.dataType) == StructType]) ##Add if you want to explode ArrayType --> type(field.dataType) == ArrayType or
+      fieldNames = dict([(field.name, field.dataType) for field in nestedDF.schema.fields if type(field.dataType) == ArrayType or type(field.dataType) == StructType])
    return nestedDF
 
 finalData = flattenNestedData(nestedDF) ## Dataframe you wanted to flatten it up.na
