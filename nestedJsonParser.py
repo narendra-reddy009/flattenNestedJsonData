@@ -6,7 +6,6 @@ def flattenNestedData(nestedDF):
 
    while len(fieldNames)!=0:
       fieldName=list(fieldNames.keys())[0]
-      print ("Processing :"+fieldName+" Type : "+str(type(fieldNames[fieldName])))
 
       if type(fieldNames[fieldName]) == StructType:
          extractedFields = [col(fieldName +'.'+ innerColName).alias(innerColName) for innerColName in [ colName.name for colName in fieldNames[fieldName]]]
