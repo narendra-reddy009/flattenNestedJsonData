@@ -17,6 +17,6 @@ def flattenNestedData(nestedDF):
       fieldNames = dict([(field.name, field.dataType) for field in nestedDF.schema.fields if type(field.dataType) == ArrayType or type(field.dataType) == StructType])
    return nestedDF
 
-finalData = flattenNestedData(nestedDF) ## Dataframe you wanted to flatten it up.na
+finalData = flattenNestedData(nestedDF) ## Dataframe you wanted to flatten it up.
 display(finalData)
 finalData.show()
